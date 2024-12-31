@@ -53,10 +53,10 @@ static MyPlugin() {
    // RegisterItem(Item item, string name, bool addDB)
    // item: the item to register
    // name: the name of the item's prefab for Photon, to allow you to PhotonNetwork.Instantiate the item's prefab
-   // addDB: whether to add the item to the game's item database
+   // addDB: whether to add the item to the game's item database (DEFAULT IS TRUE)
 	 // if you set this to true, you can allow the item to be purchased and seen in the shop
    	 // or make it spawnable in the game if set in the Item ScriptableObject itself by you
-   Itemz.RegisterItem(LoadedBundle.GetAssetByName<Item>("MyCustomItem"), "PhotonNetworkName", false);
+   Itemz.RegisterItem(LoadedBundle.GetAssetByName<Item>("MyCustomItem"), "PhotonNetworkName", true);
    
    // if you want to add a component to the item's GameObject at runtime, specify the component in the type parameter:
    // KEEP IN MIND THAT THIS WILL ADD THE COMPONENT TO THE ITEM'S GAMEOBJECT **REFERENCE**. That means if you reference the same GameObject in multiple items, the component will be added to all of them.
@@ -64,7 +64,7 @@ static MyPlugin() {
    //
    // if you *are* having trouble, compile your mod and add it to the Assets/Plugins/ folder in your Unity project directory.
    // make sure you have game DLLs in the Assets/Plugins/ folder too so Unity can recognize game references.
-   Itemz.RegisterItem<CustomComponent>(LoadedBundle.GetAssetByName<Item>("MyCustomItem"), "PhotonNetworkName", false);
+   Itemz.RegisterItem<CustomComponent>(LoadedBundle.GetAssetByName<Item>("MyCustomItem"), "PhotonNetworkName", true);
 }
 ```
 

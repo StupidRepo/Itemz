@@ -22,7 +22,7 @@ public static class Itemz
 		PUNPoolAddOurRegisteredItems();
 	}
 
-	public static void RegisterItem(Item? item, string photonName, bool addToDB = false)
+	public static void RegisterItem(Item? item, string photonName, bool addToDB = true)
 	{
 		if (item == null)
 		{
@@ -89,8 +89,18 @@ public static class Itemz
 	{
 		foreach (var item in RegisteredItems)
 		{
-			((DefaultPool)PhotonNetwork.prefabPool).ResourceCache.Add(item.Key, item.Value.itemObject);
-			Debug.LogWarning("Registering item with PUN pool: " + item.Value.displayName);
+			var defaultPool = ((DefaultPool)PhotonNetwork.prefabPool);
+
+			Debug.Log("Registering item with PUN pool: " + item.Value.displayName);
+			
+			if(defaultPool.ResourceCache.ContainsKey(item.Key))
+            {
+                Debug.Log("Item already exists in PUN pool, skipping");
+                continue;
+            }
+			
+			defaultPool.ResourceCache.Add(item.Key, item.Value.itemObject);
+			Debug.Log("Added!");
 		}
 	}
 }
